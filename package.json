@@ -1,0 +1,17 @@
+{
+	"bugs": {
+		"url": "https://github.com/EliasHasle/js-tooltips/issues"
+	},
+	"bundleDependencies": false,
+	"deprecated": false,
+	"description": "Simple tooltips with timeout, clear and styling",
+	"homepage": "https://github.com/EliasHasle/js-tooltips#readme",
+	"main": "./js-tooltips.js",
+	"name": "js-tooltips",
+	"repository": {
+	"type": "git",
+		"url": "git+https://github.com/EliasHasle/js-tooltips.git"
+	},
+	"type": "module",
+	"version": "0.0.1"
+}

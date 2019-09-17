@@ -1,0 +1,17 @@
+<!doctype html>
+
+<html>
+<head>
+	<title>Tooltip test</title>
+</head>
+<body>
+<!--<p-tooltip id="theTooltip"></p-tooltip>-->
+<script type="module">
+	import Tooltip from "./tooltips.js";
+	//const tooltip = document.getElementById("theTooltip");
+	const tooltip = new Tooltip();
+	document.body.appendChild(tooltip);
+	tooltip.show("TESTING, TESTING, TESTING...");
+</script>
+</body>
+</html>

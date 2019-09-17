@@ -4,8 +4,10 @@ class Tooltip extends HTMLParagraphElement {
 		const defaultStyle = {
 			display: "none",
 			position: "absolute",
-			top: "52vh",
+			//top: "52vh",
+			bottom: "8vh",
 			left: "4vw",
+			"text-align": "center",
 			padding: "2px",
 			"z-index": "100",
 			width: "60vw",
@@ -15,15 +17,14 @@ class Tooltip extends HTMLParagraphElement {
 			"font-face": "bold",
 			"font-family": "sans-serif",
 			"background-color": "rgba(0.17,0.17,0.17,0.8)",//#2C2C2C
-			color: "white",
-			"border-left": "2px solid #2FA1D6",
+			color: "yellow",
+			//"border-left": "2px solid #2FA1D6",
 			"pointer-events": "none"
 		};
-		
+
 		Object.assign(this.style, defaultStyle, style);
-		this.styleBackup = {};
-		Object.assign(this.styleBackup, this.style);
-		
+		this.styleBackup = this.style.cssText;
+
 		this.tooltips = tooltips;
 		this.tooltipIsEmptyError = false;
 	}
@@ -37,12 +38,16 @@ class Tooltip extends HTMLParagraphElement {
 	}
 	
 	show(s, time=6000) {
+		let tip;
 		if (s in this.tooltips) {
 			tip = this.tooltips[s];
 		} else if (s==="Emptyset") {
 			this.tooltipIsEmptyError = true;
+		} else if (! (typeof s === "string" || s instanceof String)) {
+			tip = s; //assuming tip is a tip object
+			this.tooltips[tip.name || tip.text] = tip;
 		} else {
-			tip = {text: "s"}
+			tip = {text: s}
 			this.tooltips[s] = tip;
 		}
 		
@@ -51,8 +56,7 @@ class Tooltip extends HTMLParagraphElement {
 		}
 		
 		this.innerHTML = tip.text;
-		this.style = {};
-		Object.assign(this.style, this.styleBackup);
+		this.style.cssText = this.styleBackup;
 		if (tip.style) {
 			Object.assign(this.style, tip.style);
 		}
@@ -61,4 +65,7 @@ class Tooltip extends HTMLParagraphElement {
 	}
 }
 
-customElements.define("tooltip", Tooltip, {extends: "p"});
+customElements.define("p-tooltip", Tooltip, {extends: "p"});
+
+export {Tooltip};
+export default Tooltip;
